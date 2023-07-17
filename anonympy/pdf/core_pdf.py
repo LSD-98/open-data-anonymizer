@@ -202,7 +202,6 @@ class pdfAnonymizer(object):
             ner = self._nlp(self.texts[0])
 
             find_emails(text=self.texts[0], matches=self.PII_objects)
-            find_numbers(text=self.texts[0], matches=self.PII_objects)
             find_months(text=self.texts[0], matches=self.PII_objects)
 
             find_EOI(pipeline=ner, matches=self.PII_objects, EOI="PER")
@@ -226,7 +225,6 @@ class pdfAnonymizer(object):
                 ner = self._nlp(excerpt)
 
                 find_emails(text=excerpt, matches=temp_pii)
-                find_numbers(text=excerpt, matches=temp_pii)
                 find_months(text=excerpt, matches=temp_pii)
 
                 find_EOI(pipeline=ner, matches=temp_pii, EOI="PER")
