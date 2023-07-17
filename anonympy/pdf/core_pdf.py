@@ -11,7 +11,7 @@ from transformers import pipeline
 from anonympy.pdf.utils_pdf import alter_metadata, \
      draw_black_box_pytesseract, find_EOI, \
      find_coordinates_pytesseract, find_emails, \
-     find_months, find_numbers
+     find_months, find_numbers, find_GPa
 
 
 class pdfAnonymizer(object):
