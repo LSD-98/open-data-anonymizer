@@ -101,6 +101,11 @@ def find_numbers(text: str, matches: list) -> None:
     matches += match
 
 
+def find_GPag(text: str, matches:list) ->None:
+    match = re.findall(r"GP-[0-9]+", text)
+    matches += match
+    
+
 def find_months(text: str, matches: list) -> None:
     match = re.findall(
         r"(?:January|February|March|April|May|June|July|August|\
