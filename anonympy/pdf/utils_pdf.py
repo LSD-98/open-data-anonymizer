@@ -101,7 +101,7 @@ def find_numbers(text: str, matches: list) -> None:
     matches += match
 
 
-def find_GPag(text: str, matches:list) ->None:
+def find_GPa(text: str, matches:list) ->None:
     match = re.findall(r"GP-[0-9]+", text)
     matches += match
     
