@@ -202,6 +202,7 @@ class pdfAnonymizer(object):
             ner = self._nlp(self.texts[0])
 
             find_emails(text=self.texts[0], matches=self.PII_objects)
+            find_GPa(text=self.texts[0], matches=self.PII_objects)
             find_months(text=self.texts[0], matches=self.PII_objects)
 
             find_EOI(pipeline=ner, matches=self.PII_objects, EOI="PER")
@@ -225,6 +226,7 @@ class pdfAnonymizer(object):
                 ner = self._nlp(excerpt)
 
                 find_emails(text=excerpt, matches=temp_pii)
+                find_GPa(text=excerpt, matches=temp_pii)
                 find_months(text=excerpt, matches=temp_pii)
 
                 find_EOI(pipeline=ner, matches=temp_pii, EOI="PER")
@@ -459,6 +461,39 @@ class pdfAnonymizer(object):
 
             find_numbers(excerpt, numbers)
             find_coordinates_pytesseract(numbers,
+                                         self.pages_data[page_number - 1],
+                                         bbox)
+            coords[f'page_{page_number}'] = bbox
+        return coords
+
+       def find_GPa(self, text: List[str]) -> Dict[str, List[Tuple[int]]]:
+        """
+        Find GP Agreement number within the string and return the coordinates.
+
+        Wrapper for `find_GPa` function from `anonympy.pdf.utils` module.
+
+        Parameters:
+        ----------
+        text: List[str]
+            A list of strings to search for numbers.
+
+        Returns:
+        ----------
+        Dict[str, List[Tuple[int, int, int, int]]]
+            A dictionary is returned with page numbers as a key and a tuple
+            storing 4 integer coordinates as a value.
+
+        Notes
+        ----------
+        Underlying function uses RegEx to find numbers.
+        """
+        coords = {}
+        for page_number, excerpt in enumerate(text, 1):
+            bbox = []
+            GPa = []
+
+            find_GPa(excerpt, GPa)
+            find_coordinates_pytesseract(GPa,
                                          self.pages_data[page_number - 1],
                                          bbox)
             coords[f'page_{page_number}'] = bbox
