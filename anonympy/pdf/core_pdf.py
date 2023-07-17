@@ -466,7 +466,7 @@ class pdfAnonymizer(object):
             coords[f'page_{page_number}'] = bbox
         return coords
          
-   def find_GPa(self, text: List[str]) -> Dict[str, List[Tuple[int]]]:
+    def find_GPa(self, text: List[str]) -> Dict[str, List[Tuple[int]]]:
         """
         Find GP Agreement number within the string and return the coordinates.
 
